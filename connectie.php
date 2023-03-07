@@ -10,15 +10,13 @@
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $user, $pass);
-        foreach($dbh->query('SELECT * from FOO') as $row) {
-            print_r($row);
-        }
-        $dbh = null;
-    } catch (PDOException $e) {
-        print "Error!: " . $e->getMessage() . "<br/>";
-        die();
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "connectie gelukt";
     }
-
+    catch(PDOException $e)
+    {
+        echo "connectie mislukt". $e->getMessage();
+    }
 
 
 
