@@ -1,0 +1,54 @@
+.bas_logo{
+    text-align: center;
+    margin-top: 10%;
+
+
+}
+
+img {
+    height: 500px;
+    width: 500px;
+    animation: rotation 1s infinite;
+}
+    @keyframes rotation {
+        from{
+            transform: rotate(0deg);
+        }
+        to{
+            transform: rotate(359deg);
+        }
+    }
+
+
+body{background-color: #a93738}
+
+.buttonwrapper{
+    text-align: center;
+    animation: rotation 1s infinite;
+
+}
+
+
+
+.myButton {
+    background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+    background-color:#d0451b;
+    border-radius:3px;
+    border:1px solid #942911;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:100px;
+    padding:50px 150px;
+    text-decoration:none;
+    text-shadow:1px 1px 1px #854629;
+}
+.myButton:hover {
+    background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+    background-color:#bc3315;
+}
+.myButton:active {
+    position:relative;
+    top:1px;
+}
