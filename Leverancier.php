@@ -17,10 +17,10 @@ class Leverancier
     {
 
         $this->naam = $naam;
-        $this->postcode = $postcode;
         $this->contact = $contact;
         $this->email = $email;
         $this->adres = $adres;
+        $this->postcode = $postcode;
         $this->woonplaats = $woonplaats;
         
     }
@@ -111,10 +111,10 @@ class Leverancier
 		}
 
     public function createLeverancier(){
-        $leverancierid = NULL;
+        $levid = NULL;
         $naam = $this->get_name();
-        $email = $this->get_email();
         $contact = $this->get_contact();
+        $email = $this->get_email();
         $adres = $this->get_adres();
         $postcode = $this->get_postcode();
         $woonplaats = $this->get_woonplaats();
@@ -122,7 +122,7 @@ class Leverancier
 
         $sql = $conn->Prepare("INSERT INTO leveranciers VALUES(:levid, :levnaam, :levcontact, :levEmail, :levAdres, :levPostcode, :levWoonplaats)");
         $sql->execute([
-            "levid" => $leverancierid,
+            "levid" => $levid,
             "levnaam" => $naam,
             "levcontact" => $contact,
             "levEmail" => $email,
@@ -141,60 +141,80 @@ class Leverancier
         ");
 
         $sql->execute();
-        foreach($sql as $student)
+        foreach($sql as $leverancier)
         {
-            echo $student ["levid"] . " - ";
-            echo $this->naam= $student ["naam"]. " - ";
-            echo $this->postcode = $student ["postcode"]. "<br>";
+            echo $leverancier ["levid"] . " - ";
+            echo $this->naam= $leverancier ["levnaam"]. " - ";
+            echo $this->contact= $leverancier ["levcontact"]. " - ";
+            echo $this->email= $leverancier ["levEmail"]. " - ";
+            echo $this->adres= $leverancier ["levAdres"]. " - ";
+            echo $this->postcode= $leverancier ["levPostcode"]. " - ";
+            echo $this->woonplaats = $leverancier ["levWoonplaats"]. "<br>";
         }
 
     }
-    public function searchLeverancier($leverancierid){
+    public function searchLeverancier($levid){
         require "LeverancierConnect.php";
-        $sql = $conn->Prepare("SELECT * FROM leverancier WHERE leverancierid = :leverancierid  ");
-        $sql->bindParam(":leverancierid", $leverancierid);
+        $sql = $conn->Prepare("SELECT * FROM leveranciers WHERE levid = :levid  ");
+        $sql->bindParam(":levid", $levid);
         $sql->execute();
 
-        foreach($sql as $student){
-            echo $student["leverancierid"] . "<br>";
-            echo $student["naam"] . "<br>";
-            $this->naam=$student["naam"];
-            echo $student["postcode"] . "<br>";
-            $this->postcode=$student["postcode"];
+        foreach($sql as $leverancier){
+            echo $leverancier["levid"] . "<br>";
+            echo $leverancier["levnaam"] . "<br>";
+            $this->naam=$leverancier["levnaam"];
+            echo $leverancier["levcontact"] . "<br>";
+            $this->contact=$leverancier["levcontact"];
+            echo $leverancier["levEmail"] . "<br>";
+            $this->email=$leverancier["levEmail"];
+            echo $leverancier["levAdres"] . "<br>";
+            $this->adres=$leverancier["levAdres"];
+            echo $leverancier["levPostcode"] . "<br>";
+            $this->postcode=$leverancier["levPostcode"];
+            echo $leverancier["levWoonplaats"] . "<br>";
+            $this->woonplaats=$leverancier["levWoonplaats"];
 
         }
     }
-    public function deleteLeverancier($leverancierid)
+    public function deleteLeverancier($levid)
 		{
 			require "LeverancierConnect.php";
 			// statement maken
 			$sql = $conn->prepare("
-									delete from leverancier
-									where leverancierid = :leverancierid
+									delete from leveranciers
+									where levid = :levid
 								 ");
 			// variabele in de statement zetten
-			$sql->bindParam(":leverancierid", $leverancierid);
+			$sql->bindParam(":levid", $levid);
 			$sql->execute();
 		}
 
-        public function updateLeverancier($leverancierid)
+        public function updateLeverancier($levid)
 		{
 			require "LeverancierConnect.php";
 			// gegevens uit het object in variabelen zetten 
-			$leverancierid;
+			$levid;
 			$naam 		= $this->get_name();
-			$postcode 	= $this->get_postcode();
+            $contact    = $this->get_contact();
+            $email      = $this->get_email();
+            $adres      = $this->get_adres();
+            $postcode 	= $this->get_postcode();
+            $woonplaats = $this->get_woonplaats();
+
 			// statement maken
 			$sql = $conn->prepare("
-									update leverancier
-									set adres=:adres, naam=:naam, postcode=:postcode
-									where leverancierid=:leverancierid
+									update leveranciers
+									set levnaam=:levnaam, levcontact=:levcontact, levEmail=:levemail, levAdres=:levadres , levPostcode=:levpostcode , levWoonplaats=:levwoonplaats 
+									where levid=:levid
 								 ");
 			// variabelen in de statement zetten
-			$sql->bindParam(":leverancierid", $leverancierid);
-			$sql->bindParam(":adres", $adres);
-			$sql->bindParam(":naam", $naam);
-			$sql->bindParam(":postcode", $postcode);
+			$sql->bindParam(":levid", $levid);
+			$sql->bindParam(":levnaam", $naam);
+			$sql->bindParam(":levcontact", $contact);
+			$sql->bindParam(":levemail", $email);
+            $sql->bindParam(":levadres", $adres);
+            $sql->bindParam(":levpostcode", $postcode);
+            $sql->bindParam(":levwoonplaats", $woonplaats);
 			$sql->execute();
 		}
 

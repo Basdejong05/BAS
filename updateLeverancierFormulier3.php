@@ -11,17 +11,20 @@
 			require "Leverancier.php";
 
             // gegevens uit de array in variabelen stoppen
-		    $leverancierid = $_POST["leverancierIdVak"];
-			$naam = $_POST["naamVak"];
-            $postcode = $_POST["postcodeVak"];
-            $bedrijf = $_POST["bedrijfVak"];
+		    $levid = $_POST["leverancierIdVak"];
+			$naam = $_POST["levnaamVak"];
+			$contact = $_POST["levcontactVak"];
+			$email = $_POST["levemailVak"];
+			$adres = $_POST["levadresVak"];
+            $postcode = $_POST["levpostcodeVak"];
+            $woonplaats = $_POST["levwoonplaatsVak"];
 			
             // maken object ---------------------------------------------------
-			$student1 = new Leverancier($bedrijf, $naam, $postcode); // maakt object
-			$student1->updateLeverancier($leverancierid);		           // vervangt de tabelgegevens voor objectgegevens
+			$leverancier1 = new Leverancier($naam, $contact, $email , $adres, $postcode , $woonplaats); // maakt object
+			$leverancier1->updateLeverancier($levid);		           // vervangt de tabelgegevens voor objectgegevens
             echo "Dit zijn de gewijzigde gegevens: <br/>";
-            echo $leverancierid."<br/>";
-			$student1->afdrukken();	                       // drukt object af
+            echo $levid."<br/>";
+			$leverancier1->afdrukken();	                       // drukt object af
 
 		?>
 		<a href="leveranciermenu.html">Terug naar het hoofdmenu</a>

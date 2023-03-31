@@ -8,23 +8,29 @@
 		
 		<?php
 			require "Leverancier.php";					// nodig om object te maken
-			$leverancierid = $_POST["leverancierIdVak"];	// uitlezen vakje van deleteLeverancierForm1 
-			$student1 = new Leverancier();				// object aanmaken
-			$student1->searchLeverancier($leverancierid);	
+			$levid = $_POST["leverancierIdVak"];	// uitlezen vakje van deleteLeverancierForm1 
+			$leverancier1 = new Leverancier();				// object aanmaken
+			$leverancier1->searchLeverancier($levid);	
 			// properties in variabelen zetten
-			$naam=$student1->get_name();
-			$postcode=$student1->get_postcode();
-			$bedrijf=$student1->get_bedrijf();
+			$naam=$leverancier1->get_name();
+			$postcode=$leverancier1->get_postcode();
+			$adres=$leverancier1->get_adres();
+			$woonplaats=$leverancier1->get_woonplaats();
+			$email=$leverancier1->get_email();
+			$contact=$leverancier1->get_contact();
 		?>
 		
 		<form action="updateLeverancierFormulier3.php" method="post">
-			<!-- $leverancierid mag niet meer gewijzigd worden -->
+			<!-- $levid mag niet meer gewijzigd worden -->
 			<br>
-            <?php echo $leverancierid ?>
-            <input type="hidden" name="leverancierIdVak" value="<?php echo $leverancierid;  ?> "><br>
-            <input type="text"   name="naamVak"      value="<?php echo $naam;     ?> "><br/>
-            <input type="text"   name="postcodeVak"  value="<?php echo $postcode;  ?> "><br/>
-            <input type="text"   name="bedrijfVak" value="<?php echo $bedrijf;  ?> "><br/><br/>
+            <?php echo $levid ?>
+            <input type="hidden" name="leverancierIdVak" value="<?php echo $levid;  ?> "><br>
+            <input type="text"   name="levnaamVak"      value="<?php echo $naam;     ?> "><br/>
+            <input type="text"   name="levcontactVak"  value="<?php echo $contact;  ?> "><br/>
+			<input type="text"   name="levemailVak"  value="<?php echo $email;  ?> "><br/>
+            <input type="text"   name="levadresVak"      value="<?php echo $adres;     ?> "><br/>
+            <input type="text"   name="levpostcodeVak"  value="<?php echo $postcode;  ?> "><br/>
+            <input type="text"   name="levwoonplaatsVak" value="<?php echo $woonplaats;  ?> "><br/><br/>
 			<input type="submit"><br/><br/>
 		</form>
 
